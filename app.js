@@ -23,19 +23,38 @@ app.get("/", function(req,res){
     res.redirect("/todos");
 });
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
 app.get("/todos", function(req, res){
-    Todo.find({}, function(err, todos){
+  if(req.query.keyword){ // If there is a query string called keyword
+      // set the constant regex equal to a new regex pulled from the query string
+      const regex = new RegExp(escapeRegex(req.query.keyword), "gi");
+      // query the DB for the Todos with the regex
+      Todo.find({ text: regex}, function(err, todos){
         if(err){
-            console.log(err);
+          console.log(err);
         } else {
-            if(req.xhr){
-                res.json(todos);
-            } else {
-                res.render("index", {todos: todos});
-            }
+          res.json(todos);
         }
-    });
+      });
+  } else {
+      // if there wasn't any query
+      Todo.find({}, function(err, todos){
+          if(err){
+              console.log(err);
+          } else {
+              if(req.xhr){ // If req was made with AJAX
+                  res.json(todos); // send back all todos as JSON
+              } else {
+                  res.render("index", {todos: todos}); // otherwise render the index view
+              }
+          }
+      });
+  }
 });
+
 
 app.get("/todos/new", function(req, res) {
     res.render("new");
