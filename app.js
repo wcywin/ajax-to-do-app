@@ -5,7 +5,7 @@ var express             = require("express"),
     expressSanitizer    = require("express-sanitizer"),
     methodOverride      = require("method-override");
     
-var url = process.env.AJAXDATABASEURL || "mongodb://localhost/ajax_spa";
+var url = process.env.AJAXDATABASEURL;
 mongoose.connect(url, {useMongoClient: true});
 mongoose.Promise = global.Promise;
 app.use(express.static("public"));
