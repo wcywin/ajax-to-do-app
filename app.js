@@ -5,7 +5,8 @@ var express             = require("express"),
     expressSanitizer    = require("express-sanitizer"),
     methodOverride      = require("method-override");
     
-mongoose.connect("mongodb://localhost/ajax_spa", {useMongoClient: true});
+// var url = process.env.DATABASEURL || "mongodb://localhost/ajax_spa";
+mongoose.connect("mongodb://wcywin:AppAjax123!@ds113906.mlab.com:13906/ajaxapp", {useMongoClient: true});
 mongoose.Promise = global.Promise;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
