@@ -1,5 +1,5 @@
-# ajax-to-do-app
-AJAX To Do App - made on Node.js, Express, Mongoose, EJS and mongoDB. Deployed on Heroku and mLab.
+# Ajax To Do App
+Made on Node.js, Express, Mongoose, EJS and mongoDB. Deployed on Heroku and mLab.
 
 In development:
 - gulp used to transpile ES6 to ES2015
